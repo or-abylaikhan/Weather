@@ -8,7 +8,6 @@ import org.koin.core.context.startKoin
 import timber.log.Timber
 import timber.log.Timber.Forest.plant
 
-
 class WeatherApp : Application() {
 
     override fun onCreate() {
@@ -18,8 +17,6 @@ class WeatherApp : Application() {
             androidContext(this@WeatherApp)
             androidLogger()
         }
-        if (BuildConfig.DEBUG) {
-            plant(Timber.DebugTree())
-        }
+        if (BuildConfig.DEBUG) plant(Timber.DebugTree())
     }
 }
