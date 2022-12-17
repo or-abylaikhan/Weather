@@ -8,6 +8,7 @@ import com.example.weather.util.Constants.AIR_QUALITY_API_BASE_URL
 import com.example.weather.util.Constants.GEO_API_BASE_URL
 import com.example.weather.util.Constants.NETWORK_TIME_OUT
 import com.example.weather.util.Constants.WEATHER_API_BASE_URL
+import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
@@ -36,7 +37,10 @@ private fun createGeoService(retrofitBuilder: Retrofit.Builder) =
     retrofitBuilder.baseUrl(GEO_API_BASE_URL).build().create(GeoService::class.java)
 
 private fun createRetrofitBuilder(httpClient: OkHttpClient) =
-    Retrofit.Builder().client(httpClient).addConverterFactory(MoshiConverterFactory.create())
+    Retrofit.Builder()
+        .client(httpClient)
+        .addConverterFactory(MoshiConverterFactory.create())
+        .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
 
 private fun createHttpClient(loggingInterceptor: HttpLoggingInterceptor) =
     OkHttpClient.Builder().apply {
